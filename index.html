@@ -120,32 +120,43 @@
 </span>
         </nav>
   </div>
-</div>
+  <div class="pane pane-with-footer">
+    <div>
+    </div>
 
-</div>
-<div class="pane pane-sidebar">
-
-<footer class="toolbar toolbar-footer">
-  <div class="btn-group" style="padding-top: 20px; padding-bottom: 20px;">
-  <button class="btn btn-large btn-default">
-      <span class="icon icon-play"></span>
-    </button>
-    <button class="btn  btn-large btn-default">
-      <span class="icon icon-cw"></span>
-    </button>
+  <div class="toolbar toolbar-footer" style="bottom: 0px;">
+    <div class="btn-group" style=" padding-left: 20px; padding-top: 20px; padding-bottom: 20px;">
     <button class="btn btn-large btn-default">
-      <span class="icon icon-code"></span>
-    </button>
+        <span class="icon icon-play"></span>
+      </button>
+      <button class="btn  btn-large btn-default">
+        <span class="icon icon-cw"></span>
+      </button>
+      <button class="btn btn-large btn-default">
+        <span class="icon icon-code"></span>
+      </button>
+      <button class="btn btn-large btn-default">
+        <span class="icon icon-brush"></span>
+      </button>
+      <button class="btn btn-large btn-default">
+        <span class="icon icon-cloud"></span>
+      </button>
+    </div>
     <button class="btn btn-large btn-default">
-      <span class="icon icon-brush"></span>
-    </button>
-    <button class="btn btn-large btn-default">
-      <span class="icon icon-cloud"></span>
+      <span class="icon icon-login"></span>
     </button>
   </div>
-  <button class="btn btn-large btn-default">
-    <span class="icon icon-login"></span>
-  </button>
 </div>
-</footer>
+  </div>
 </div>
+
+</div>
+
+<style>
+  .pane-with-footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-image: linear-gradient(black, gray);
+  }
+</style>
