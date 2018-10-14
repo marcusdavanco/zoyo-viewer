@@ -5,8 +5,11 @@
 
 <div class="window" style="width: 1300px;">
   <header class="toolbar toolbar-header">
+
     <h1 style="font-size: 12px;">
       <div class="toolbar-actions">
+        <div class="zoyo-header">
+          <div class="left-buttons">
         <button class="btn btn-large btn-default">
           <span class="icon icon-cancel"></span>
         </button>
@@ -18,8 +21,10 @@
           <span class="icon icon-forward"></span>
         </button>
       </div>
+      </div>
       <strong>Zoyo</strong>
-      <div class="btn-group">
+      <div class="right-buttons">
+    <div class="btn-group">
       <button class="btn btn-large btn-default">
            <span class="icon icon-search"></span>
          </button>
@@ -29,8 +34,10 @@
             <button class="btn btn-large btn-default">
                  <span class="icon icon-resize-full"></span>
                </button>
+      </div>
+       </div>
           </div>
-    </h1>
+     </h1>
 
   </header>
 <div class="window-content">
@@ -125,7 +132,9 @@
     </div>
 
   <div class="toolbar toolbar-footer" style="bottom: 0px;">
-    <div class="btn-group" style=" padding-left: 20px; padding-top: 20px; padding-bottom: 20px;">
+    <div class="zoyo-header"
+    <div class="btn-group" style=" padding-top: 20px; padding-bottom: 20px;">
+      <div class="left-buttons">
     <button class="btn btn-large btn-default">
         <span class="icon icon-play"></span>
       </button>
@@ -142,10 +151,13 @@
         <span class="icon icon-cloud"></span>
       </button>
     </div>
+  <div class="right-buttons">
     <button class="btn btn-large btn-default">
       <span class="icon icon-login"></span>
     </button>
   </div>
+    </div>
+</div>
 </div>
   </div>
 </div>
@@ -157,6 +169,20 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    background-image: linear-gradient(black, gray);
+    background-image: linear-gradient(black, darkslategray);
+}
+
+  .zoyo-header {
+    display: flex;
+    justify-content: space-between;
   }
+
+  .left-buttons {
+    margin-left: 10px;
+  }
+
+  .right-buttons {
+    margin-right: 10px;
+  }
+
 </style>
