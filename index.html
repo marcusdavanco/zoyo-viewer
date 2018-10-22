@@ -120,7 +120,7 @@
 
 
         <div class="pane pane-with-footer">
-          <div class="figures" style="overflow: auto;">
+          <div class="figures">
               <img class="active-figure" src="https://via.placeholder.com/300x200">
               <img class="figure" src="https://via.placeholder.com/300x200">
               <img class="figure" src="https://via.placeholder.com/300x200">
@@ -130,7 +130,7 @@
               <img class="figure" src="https://via.placeholder.com/300x200">
               <img class="figure" src="https://via.placeholder.com/300x200">
           </div>
-          <div class="toolbar toolbar-footer" style="bottom: 0px; position: fixed;">
+          <div class="toolbar toolbar-footer" style="bottom: 0px;">
             <div class="zoyo-header" style="padding-top: 20px; padding-bottom: 20px;">
               <div class="left-buttons">
                 <button class="btn btn-large btn-default">
@@ -162,9 +162,9 @@
 <style>
   .pane-with-footer {
     display: flex;
-    bottom: 70px;
-    top: 0px;
-    height: 612px;
+    /*bottom: 70px;*/
+    /*top: 0px;*/
+    /*height: 612px;*/
     flex-direction: column;
     justify-content: space-between;
     background-image: linear-gradient(black, darkslategray);
@@ -186,7 +186,7 @@
   }
 
   .low-right-buttons {
-    margin-left: 750px;
+    /*margin-left: 750px;*/
     margin-right: 10px;
   }
 
@@ -194,6 +194,9 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    overflow:auto;
+    flex-grow:1;
+
 
   }
 
