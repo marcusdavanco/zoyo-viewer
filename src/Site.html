@@ -1,22 +1,46 @@
 <!DOCTYPE html>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photon/0.1.2-alpha/css/photon.css" />
 <div class="window" style="height: 100vh;"">
-    <header class=" toolbar toolbar-header">
-    <h1 style="text-align:center; font-size: 18px; padding-bottom: 10px;">
-        __atago_kantai_collection_drawn_by_dd_ijigendd__de5f02bc2a2c68221ea60baefba1dad2.png(~/Pictures) - Photos
-    </h1>
+    <header class=" toolbar toolbar-header zoyo-header">
+    <div>
+        <p style="font-size: 16px;">
+            __atago_kantai_collection_drawn_by_dd_ijigendd__de5f02bc2a2c68221ea60baefba1dad2.png(~/Pictures) - Photos
+        </p>
+    </div>
     </header>
     <div class="window-content">
         <div class="pane checker">
             <div class="figure">
                 <img src="https://loremflickr.com/640/800/car/?random=8">
-            </div>    
+            </div>
         </div>
     </div>
-        <footer class="toolbar toolbar-footer">
-            <h1 style="text-align:center; font-size: 18px; padding-bottom: 10px;">Footer</h1>
-        </footer>
-    
+    <footer class="toolbar toolbar-footer">
+        <div class="leftFooterElements">
+            <div style='margin-top:1.5%'>
+                <img src='./icons/go-previous.svg' />
+                <img src='./icons/go-next.svg' />
+            </div>
+            <div style='margin-top:0.75%'>
+                <img src='./icons/object-rotate-right.svg'/>
+                <img src='./icons/object-flip-horizontal.svg' />
+            </div>
+                
+            <div style='margin-top:0.75%'>
+                    <img src='./icons/image-crop.svg' />
+                    <img src='./icons/object-straighten.svg' />
+            </div>
+            <div style='margin-top:0.75%'>
+                    <img src='./icons/image-red-eye.svg' />
+                    <img src='./icons/image-adjust.svg' />
+                    <img src='./icons/image-auto-adjust.svg' /> 
+            </div>
+        </div>
+        <div class="rightFooterElements">
+
+        </div>
+    </footer>
+
 </div>
 
 <style>
@@ -35,6 +59,7 @@
         flex-direction: row;
         justify-content: space-between;
 
+
     }
 
     .figure {
@@ -43,4 +68,21 @@
         max-width: 100%;
         max-height: 100%;
     }
+
+    
+    .leftFooterElements{
+        margin-left: 1%;
+        display: flex;
+        justify-content: left;
+        max-width: 45%;
+        justify-content: space-between;
+        
+    }
+
+    .rightFooterElements{
+        display: flex;
+        justify-content: right;
+
+    }
+
 </style>
