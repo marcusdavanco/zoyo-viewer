@@ -1,170 +1,78 @@
 import React from 'react'
 
+import goprevious from './icons/go-previous.svg'
+import gonext from './icons/go-next.svg'
+import objectrotateright from './icons/object-rotate-right.svg'
+import objectfliphorizontal from './icons/object-flip-horizontal.svg'
+import imagecrop from './icons/image-crop.svg'
+import objectstraighten from './icons/object-straighten.svg'
+import imageredeye from './icons/image-red-eye.svg'
+import imageadjust from './icons/image-adjust.svg'
+import imageautoadjust from './icons/image-auto-adjust.svg'
 
 const Site = props => {
-  return (
-
-    <div>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photon/0.1.2-alpha/css/photon.css" />
-
-
-      {/*Window div*/}
-      <div className="window" style={{ width: 1300 }}>
-      {/*Header*/}
-        <header className="toolbar toolbar-header">
-          <h1 style={{ fontSize: 12 }}>
-            <div className="toolbar-actions">
-              <div className="zoyo-header">
-                <div className="left-buttons">
-                  <button className="btn btn-large btn-default">
-                    <span className="icon icon-cancel" />
-                  </button>
-                  <div className="btn-group">
-                    <button className="btn btn-large btn-default active">
-                      <span className="icon icon-reply" />
-                    </button>
-                    <button className="btn btn-large btn-default">
-                      <span className="icon icon-forward" />
-                    </button>
-                  </div>
+    return (
+        <div>
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photon/0.1.2-alpha/css/photon.css" />
+            <div className="window" style={{height: '100vh'}}>
+                < header className=" toolbar toolbar-header" >
+                    <div className='title'>
+                        <p><strong>
+                            __atago_kantai_collection_drawn_by_dd_ijigendd__de5f02bc2a2c68221ea60baefba1dad2.png(~/Pictures) -
+                            Photos
+            </strong>
+                        </p>
+                    </div>
+                </header >
+                <div className="window-content">
+                    <div className="pane checker">
+                        <img className="figure" src="https://danbooru.donmai.us/data/__atago_kantai_collection_drawn_by_dd_ijigendd__de5f02bc2a2c68221ea60baefba1dad2.png" />
+                    </div>
                 </div>
-                <strong>Photos</strong>
-                <div className="right-buttons">
-                  <div className="btn-group">
-                    <button className="btn btn-large btn-default">
-                      <span className="icon icon-search" />
-                    </button>
-                    <button className="btn btn-large btn-default">
-                      <span className="icon icon-cog" />
-                    </button>
-                    <button className="btn btn-large btn-default">
-                      <span className="icon icon-resize-full" />
-                    </button>
-                  </div>
-                </div>
-              </div>
+                <footer className="toolbar toolbar-footer zoyo-footer">
+                    <div style={{display: 'flex'}}>
+                        <div className="space-between-icons">
+                            <button className="invisible-buttons">
+                                <img className="icon" src={goprevious} />
+                            </button>
+                            <button className="invisible-buttons">
+                                <img className="icon" src={gonext} />
+                            </button>
+                        </div>
+                        <div className="space-between-icons">
+                            <button className="invisible-buttons">
+                                <img className="icon" src={objectrotateright} />
+                            </button>
+                            <button className="invisible-buttons">
+                                <img className="icon" src={objectfliphorizontal} />
+                            </button>
+                        </div>
+
+                        <div className="space-between-icons">
+                            <button className="invisible-buttons">
+                                <img className="icon" src={imagecrop} />
+                            </button>
+                            <button className="invisible-buttons">
+                                <img className="icon" src={objectstraighten} />
+                            </button>
+                        </div>
+                        <div>
+                            <button className="invisible-buttons">
+                                <img className="icon" src={imageredeye} />
+                            </button>
+                            <button className="invisible-buttons">
+                                <img className="icon" src={imageadjust.svg} />
+                            </button>
+                            <button className="invisible-buttons">
+                                <img className="icon" src={imageautoadjust} />
+                            </button>
+                        </div>
+                    </div>
+                </footer>
+
             </div>
-          </h1>
-        </header>
-        <div className="window-content" style={{ overflow: 'hidden' }}>
-          <div className="pane-group">
-          {/*Sidebar*/}
-            <div className="pane-sm sidebar" style={{ maxWidth: '100%', width: 275 }}>
-              <nav className="nav-group">
-                <h2 className="nav-group-title">
-                  <span className="icon icon-down-dir" />
-                  <strong>Libraries</strong>
-                </h2>
-                <a className="nav-group-item active">
-                  <span className="icon icon-picture" />
-                  Photos
-                </a>
-                <span className="nav-group-item">
-                  <span className="icon icon-camera" />
-                  Raw Photos
-                </span>
-                <span className="nav-group-item">
-                  <span className="icon icon-back" />
-                  Last Import
-                </span>
-                <span className="nav-group-item">
-                  <span className="icon icon-trash" />
-                  Trash
-                </span>
-              </nav>
-              <nav className="nav-group">
-                <h2 className="nav-group-title">
-                  <span className="icon icon-down-dir" />
-                  <strong>Events</strong>
-                </h2>
-                <span className="nav-group-item">
-                  <span className="icon icon-down-dir" />
-                  <span className="icon icon-folder" />
-                  2014
-                </span>
-                <span className="nav-group-item">
-                  <span className="icon" />
-                  <span className="icon icon-down-dir" />
-                  <span className="icon icon-folder" />
-                  May
-                </span>
-                <span className="nav-group-item">
-                  <span className="icon" />
-                  <span className="icon" />
-                  <span className="icon" />
-                  <span className="icon icon-calendar" />
-                  Sat, May 17, 2017
-                </span>
-                <span className="nav-group-item">
-                  <span className="icon icon-down-dir" />
-                  <span className="icon icon-folder" />
-                  2013
-                </span>
-                <span className="nav-group-item">
-                  <span className="icon icon-down-dir" />
-                  <span className="icon icon-folder" />
-                  2012
-                </span>
-                <span className="nav-group-item">
-                  <span className="icon icon-down-dir" />
-                  <span className="icon icon-folder" />
-                  2011
-                </span>
-                <span className="nav-group-item">
-                  <span className="icon" />
-                  <span className="icon" />
-                  <span className="icon icon-calendar">
-                  </span>
-                  No Events
-                </span>
-              </nav>
-            </div>
-            {/*Fig BG and Footer*/}
-            <div className="pane pane-with-footer" >
-            {/*Figures background*/}
-              <div className="figures">
-                <img className="active-figure" src="https://loremflickr.com/320/240/jrpg/?random=1" />
-                <img className="figure" src="https://loremflickr.com/320/240/jrpg/?random=2" />
-                <img className="figure" src="https://loremflickr.com/320/240/jrpg/?random=3" />
-                <img className="figure" src="https://loremflickr.com/320/240/jrpg/?random=4" />
-                <img className="figure" src="https://loremflickr.com/320/240/jrpg/?random=5" />
-                <img className="figure" src="https://loremflickr.com/320/240/jrpg/?random=6" />
-                <img className="figure" src="https://loremflickr.com/320/240/jrpg/?random=7" />
-                <img className="figure" src="https://loremflickr.com/320/240/jrpg/?random=8" />
-              </div>
-              {/*Footer*/}
-              <div className="toolbar toolbar-footer zoyo-footer" style={{bottom: '0'}}>
-                <div className="zoyo-header" style={{paddingTop: 20, paddingBottom: 20}}>
-                  <div className="left-buttons">
-                    <button className="btn btn-large btn-default">
-                      <span className="icon icon-play" />
-                    </button>
-                    <button className="btn  btn-large btn-default">
-                      <span className="icon icon-cw" />
-                    </button>
-                    <button className="btn btn-large btn-default">
-                      <span className="icon icon-code" />
-                    </button>
-                    <button className="btn btn-large btn-default">
-                      <span className="icon icon-brush" />
-                    </button>
-                    <button className="btn btn-large btn-default">
-                      <span className="icon icon-cloud" />
-                    </button>
-                  </div>
-                  <div className="low-right-buttons">
-                    <button className="btn btn-large btn-default">
-                      <span className="icon icon-login" />
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
         </div>
-        </div>
-        </div>
-  )
+    )
 }
 
 export default Site

@@ -1,63 +1,32 @@
+    .checker {
+        background-color: rgb(189, 188, 188);
+        background-image: linear-gradient(45deg, #808080 25%, transparent 25%), linear-gradient(-45deg, #808080 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #808080 75%), linear-gradient(-45deg, transparent 75%, #808080 75%);
+        background-size: 20px 20px;
+        background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    }
 
-  .pane-with-footer {
-    display: flex;
-    /*bottom: 70px;*/
-    /*top: 0px;*/
-    /*height: 612px;*/
-    flex-direction: column;
-    justify-content: space-between;
-    background-image: linear-gradient(black, darkslategray);
-    overflow: hidden;
-  }
+    .figure {
+        display: block;
+        margin: 0 auto;
+        height: 100%;
+    }
 
-  .zoyo-header {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-  }
+    .zoyo-footer{
+        height: 50px; 
+        display: flex; 
+        align-items: center; 
+        justify-content: center;
+    }
 
-  .left-buttons {
-    margin-left: 10px;
-  }
+    .invisible-buttons{
+        border: 0;
+        background-color: transparent;
+    }
 
-  .right-buttons {
-    margin-right: 10px;
-  }
+    .icon{
+        height: 35px;
+    }
 
-  .low-right-buttons {
-    /*margin-left: 750px;*/
-    margin-right: 10px;
-  }
-
-  .figures {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    overflow:auto;
-    flex-grow:1;
-
-
-  }
-
-  .figure {
-    margin: 20px;
-    box-shadow: 0px 2px 3px rgba(0,0,0,.13) ,1px 2px 2px rgba(0,0,0,.1) , -1px -2px 2px rgba(0,0,0,.05) ;
-    flex-grow: 1;
-
-  }
-
-  .active-figure {
-    border-color: rgb(62,141,240);
-    border-width: 5px;
-    border-style: solid;
-    border-radius: 1%;
-    margin: 20px;
-    box-shadow: 0px 2px 3px rgba(0,0,0,.13) ,1px 2px 2px rgba(0,0,0,.1) , -1px -2px 2px rgba(0,0,0,.05) ;
-    flex-grow: 1;
-
-  }
-
-  .zoyo-footer {
-    flex-shrink: 0;
-  }
-
+    .space-between-icons{
+        margin-right: 10px;
+    }
