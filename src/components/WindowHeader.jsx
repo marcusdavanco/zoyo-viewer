@@ -6,8 +6,7 @@ const WindowHeader = props => {
             <header className=" toolbar toolbar-header" >
                     <div className='title'>
                         <p><strong>
-                            __atago_kantai_collection_drawn_by_dd_ijigendd__de5f02bc2a2c68221ea60baefba1dad2.png(~/Pictures) -
-                            Photos
+                           {props.title}
                         </strong></p>
                     </div>
                 </header >
