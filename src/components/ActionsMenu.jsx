@@ -15,7 +15,7 @@ import imageautoadjust from '../icons/image-auto-adjust.svg'
 const ActionsMenu = props => {
     return (
         <footer className="toolbar toolbar-footer zoyo-footer">
-            <div style={{ display: 'flex' }}>
+            <div style={{display: 'flex'}}>
                 <div className="space-between-icons">
                     <IconBtn image={goprevious} />
                     <IconBtn image={gonext} />
