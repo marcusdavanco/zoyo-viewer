@@ -8,10 +8,12 @@ import ActionsMenu from './components/ActionsMenu';
 class App extends Component {
   constructor() {
     super()
-    this.state = { dirPath: '~/Pictures', 
-                   fileNames: null, 
-                   curFileName: '__atago_kantai_collection_drawn_by_dd_ijigendd__de5f02bc2a2c68221ea60baefba1dad2.png',
-                   arrayIndex: 0, }
+    this.state = {
+      dirPath: '~/Pictures',
+      fileNames: null,
+      curFileName: '__atago_kantai_collection_drawn_by_dd_ijigendd__de5f02bc2a2c68221ea60baefba1dad2.png',
+      arrayIndex: 0,
+    }
   }
 
 
@@ -35,31 +37,46 @@ class App extends Component {
     console.log(this.state);
 
   }
-    //WIP
-    viewNext(){
-      console.log(this.state);
-
+  //WIP
+  viewNext = () => {
+    console.log('next')
+    if (this.state.arrayIndex < (this.state.fileNames.length - 1)) {
+      this.setState(prevState => { return ({ arrayIndex: prevState.arrayIndex + 1 }) })
     }
-    //WIP
-    viewPrev(){
-      console.log(this.state);
-
+    else {
+      this.setState({ arrayIndex: 0 })
     }
-
-  render() {
-    return (
-      <div>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photon/0.1.2-alpha/css/photon.css" />
-
-        <div className="window" style={{ height: '100vh' }}>
-          <WindowHeader title={this.state.curFileName + '(' + this.state.dirPath + ')' + ' - Photos'} />
-          <Canvas image={this.state.dirPath + this.state.curFileName} />
-          <ActionsMenu onClick={[this.viewPrev, this.viewNext]}/>
-        </div>
-
-      </div>
-    );
+    this.setState(prevState => { return ({ curFileName: prevState.fileNames[this.state.arrayIndex] }) });
+    console.log(this.state);
   }
-}
 
-export default App;
+  //WIP
+  viewPrev = () => {
+    console.log('previous')
+    if (this.state.arrayIndex > 0) {
+      this.setState(prevState => { return ({ arrayIndex: prevState.arrayIndex - 1 }) })
+    }
+    else{
+      this.setState({ arrayIndex: (this.state.fileNames.length - 1) })
+    }
+      this.setState(prevState => { return ({ curFileName: prevState.fileNames[this.state.arrayIndex] }) });
+      console.log(this.state);
+    }
+
+    render() {
+      return (
+        <div>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photon/0.1.2-alpha/css/photon.css" />
+
+          <div className="window" style={{ height: '100vh' }}>
+            <WindowHeader title={this.state.curFileName + '(' + this.state.dirPath + ')' + ' - Photos'} />
+            <Canvas image={this.state.dirPath + this.state.curFileName} />
+            <ActionsMenu onClick={[this.viewPrev, this.viewNext]} />
+          </div>
+
+        </div>
+      );
+    }
+  }
+
+  export default App;
