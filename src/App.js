@@ -33,35 +33,41 @@ class App extends Component {
         '__iws_2000_girls_frontline_drawn_by_shailiar__a36f03f5200fbec35fa48e1a284bf5c8.jpg',
       ]
     });
-    this.setState(prevState => { return ({ curFileName: prevState.fileNames[this.state.arrayIndex] }) });
-    console.log(this.state);
+    this.setState(prevState => { return ({ curFileName: prevState.fileNames[this.state.arrayIndex] }) }, () => console.log(this.state));
+    ;
 
   }
   //WIP
-  viewNext = () => {
-    console.log('next')
-    if (this.state.arrayIndex < (this.state.fileNames.length - 1)) {
-      this.setState(prevState => { return ({ arrayIndex: prevState.arrayIndex + 1 }) })
+
+  loopValue = (value) => {
+    let newvalue = value
+    if(newvalue > this.state.fileNames.length - 1) {
+      newvalue = 0;
     }
-    else {
-      this.setState({ arrayIndex: 0 })
+    if(newvalue < 0) {
+      newvalue = this.state.fileNames.length - 1
     }
-    this.setState(prevState => { return ({ curFileName: prevState.fileNames[this.state.arrayIndex] }) });
-    console.log(this.state);
+    
+    return newvalue
   }
 
-  //WIP
-  viewPrev = () => {
-    console.log('previous')
-    if (this.state.arrayIndex > 0) {
-      this.setState(prevState => { return ({ arrayIndex: prevState.arrayIndex - 1 }) })
-    }
-    else{
-      this.setState({ arrayIndex: (this.state.fileNames.length - 1) })
-    }
-      this.setState(prevState => { return ({ curFileName: prevState.fileNames[this.state.arrayIndex] }) });
-      console.log(this.state);
-    }
+ viewNext = () => {
+  console.log('next')
+  
+  let nextIndex = this.state.arrayIndex
+  nextIndex = this.loopValue(nextIndex+1)
+  
+  this.setState({ arrayIndex: nextIndex , curFileName: this.state.fileNames[nextIndex]})
+}
+
+viewPrev = () => {
+  console.log('prev')
+  
+  let nextIndex = this.state.arrayIndex
+  nextIndex = this.loopValue(nextIndex-1)
+  
+  this.setState({ arrayIndex: nextIndex , curFileName: this.state.fileNames[nextIndex]})  
+}
 
     render() {
       return (
