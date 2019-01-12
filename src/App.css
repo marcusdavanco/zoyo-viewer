@@ -11,6 +11,20 @@
         height: 100%;
     }
 
+    .loading {
+        /* display: block;
+        margin: 0 auto;
+        height: 200px; */
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 200px;
+        height: 200px;
+        margin-top: -100px; /* Half the height */
+        margin-left: -100px; /* Half the width */
+
+    }
+
     .zoyo-footer{
         height: 50px; 
         display: flex; 

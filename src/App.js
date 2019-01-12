@@ -4,6 +4,7 @@ import './App.css';
 import WindowHeader from './components/WindowHeader';
 import Canvas from './components/Canvas';
 import ActionsMenu from './components/ActionsMenu';
+import spinner from './icons/spinner.svg';
 
 class App extends Component {
   constructor() {
@@ -13,19 +14,21 @@ class App extends Component {
       fileNames: null,
       curFileName: '__atago_kantai_collection_drawn_by_dd_ijigendd__de5f02bc2a2c68221ea60baefba1dad2.png',
       arrayIndex: 0,
+      isLoading: true
     }
   }
 
-
   componentDidMount() {
     this.readDir('https://danbooru.donmai.us/data/') //'~Pictures'
+    window.addEventListener('keydown', this.keyHandling)
   }
 
   async readDir(path) {
-    this.setState({ fileNames: null, curFileName: null });
+    this.setState({ fileNames: '...', curFileName: '...' });
     this.setState({ dirPath: path });
     await new Promise(resolve => setTimeout(resolve, 2000));
     this.setState({
+      isLoading: false,
       fileNames: ['__atago_kantai_collection_drawn_by_dd_ijigendd__de5f02bc2a2c68221ea60baefba1dad2.png',
         '__jervis_and_zuihou_kantai_collection_drawn_by_amano_kouki__44c7dc4a9e4fd338c25b127c1b89b797.png',
         '__remilia_scarlet_touhou_drawn_by_nenobi_nenorium__ffdc94588bd327b0ed402bec63428e7e.jpg',
@@ -37,7 +40,6 @@ class App extends Component {
     ;
 
   }
-  //WIP
 
   loopValue = (value) => {
     let newvalue = value
@@ -69,6 +71,44 @@ viewPrev = () => {
   this.setState({ arrayIndex: nextIndex , curFileName: this.state.fileNames[nextIndex]})  
 }
 
+keyHandling = e => {
+  if(e.key === 'ArrowRight'){
+    this.viewNext();
+  }
+  else if(e.key === 'ArrowLeft'){
+    this.viewPrev();
+  }
+}
+
+/*WIP
+rotateCw = () => {
+
+
+mirror = () => {
+
+}
+
+crop = () => {
+
+}
+
+straighten = () => {
+
+}
+
+redeye = () => {
+
+}
+
+imageAdjust = () => {
+
+}
+
+autoAdjust = () => {
+
+}
+*/
+
     render() {
       return (
         <div>
@@ -76,7 +116,7 @@ viewPrev = () => {
 
           <div className="window" style={{ height: '100vh' }}>
             <WindowHeader title={this.state.curFileName + '(' + this.state.dirPath + ')' + ' - Photos'} />
-            <Canvas image={this.state.dirPath + this.state.curFileName} />
+            {this.state.isLoading?<Canvas style={'loading'} image={spinner}/> : <Canvas style={'figure'} image={this.state.dirPath + this.state.curFileName}/>}
             <ActionsMenu onClick={[this.viewPrev, this.viewNext]} />
           </div>
 
