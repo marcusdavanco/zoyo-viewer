@@ -1,34 +1,36 @@
-import div from './divosMock';
-
 import React, { Component } from 'react';
 import './App.css';
 
+import div from './divosMock';
 import WindowHeader from './components/WindowHeader';
 import Canvas from './components/Canvas';
 import ActionsMenu from './components/ActionsMenu';
 import spinner from './icons/spinner.svg';
 
+
 class App extends Component {
   constructor() {
-    super()
+    super();
     this.state = {
-      dirPath: '~/Pictures',
+      dirPath: null,
       fileNames: null,
-      curFileName: '__atago_kantai_collection_drawn_by_dd_ijigendd__de5f02bc2a2c68221ea60baefba1dad2.png',
-      arrayIndex: 0,
-      isLoading: true
-    }
+      curFileName: null
+    };
+
+    this.viewNext = this.viewNext.bind(this);
+    this.viewPrev = this.viewPrev.bind(this);
+    this.onKeyDown = this.onKeyDown.bind(this);
   }
 
   componentDidMount() {
-    this.readDir('~/Pictures')
-    window.addEventListener('keydown', this.keyHandling)
+    this.readDir('https://danbooru.donmai.us/data/'); //'~/Pictures'
+    window.addEventListener('keydown', this.onKeyDown);
   }
 
   async readDir(path) {
-    this.setState({ fileNames: '...', curFileName: '...' });
+    this.setState({ fileNames: null, curFileName: null });
     this.setState({ dirPath: path });
-
+    //alien code detected!
     let files = await div.arrayFromStream(div.fs.src(`${path}/*`));
 
     for (let f of files) {
@@ -42,10 +44,9 @@ class App extends Component {
         console.log('===> Contents:', await div.bufFromStream(f.contents));
       }
     }
-
+    //end of alien code...
     await new Promise(resolve => setTimeout(resolve, 2000));
     this.setState({
-      isLoading: false,
       fileNames: ['__atago_kantai_collection_drawn_by_dd_ijigendd__de5f02bc2a2c68221ea60baefba1dad2.png',
         '__jervis_and_zuihou_kantai_collection_drawn_by_amano_kouki__44c7dc4a9e4fd338c25b127c1b89b797.png',
         '__remilia_scarlet_touhou_drawn_by_nenobi_nenorium__ffdc94588bd327b0ed402bec63428e7e.jpg',
@@ -53,93 +54,94 @@ class App extends Component {
         '__iws_2000_girls_frontline_drawn_by_shailiar__a36f03f5200fbec35fa48e1a284bf5c8.jpg',
       ]
     });
-    this.setState(prevState => { return ({ curFileName: prevState.fileNames[this.state.arrayIndex] }) }, () => console.log(this.state));
-    ;
+
+    this.setState(prevState => ({ curFileName: prevState.fileNames[0] }));
 
   }
 
-  loopValue = (value) => {
-    let newvalue = value
-    if(newvalue > this.state.fileNames.length - 1) {
-      newvalue = 0;
+  slideshowLoop = (value) => {
+    let newValue = value;
+    let maxValue = this.state.fileNames.length - 1;
+
+    if (newValue > maxValue) {
+      newValue = 0;
     }
-    if(newvalue < 0) {
-      newvalue = this.state.fileNames.length - 1
+    if (newValue < 0) {
+      newValue = maxValue;
     }
-    
-    return newvalue
+
+    return newValue;
   }
 
- viewNext = () => {
-  console.log('next')
-  
-  let nextIndex = this.state.arrayIndex
-  nextIndex = this.loopValue(nextIndex+1)
-  
-  this.setState({ arrayIndex: nextIndex , curFileName: this.state.fileNames[nextIndex]})
-}
+  viewNext() {
+    let nextIndex = this.state.fileNames.indexOf(this.state.curFileName);
+    nextIndex = this.slideshowLoop(nextIndex + 1);
 
-viewPrev = () => {
-  console.log('prev')
-  
-  let nextIndex = this.state.arrayIndex
-  nextIndex = this.loopValue(nextIndex-1)
-  
-  this.setState({ arrayIndex: nextIndex , curFileName: this.state.fileNames[nextIndex]})  
-}
-
-keyHandling = e => {
-  if(e.key === 'ArrowRight'){
-    this.viewNext();
+    this.setState({ curFileName: this.state.fileNames[nextIndex] });
   }
-  else if(e.key === 'ArrowLeft'){
-    this.viewPrev();
+
+  viewPrev() {
+    let nextIndex = this.state.fileNames.indexOf(this.state.curFileName);
+    nextIndex = this.slideshowLoop(nextIndex - 1);
+
+    this.setState({ curFileName: this.state.fileNames[nextIndex] });
   }
-}
 
-/*WIP
-rotateCw = () => {
+  onKeyDown(e) {
+    if (e.key === 'ArrowRight') this.viewNext();
+    else if (e.key === 'ArrowLeft') this.viewPrev();
+  }
 
+  /*WIP
+  rotateCw = () => {
+  
+  
+  mirror = () => {
+  
+  }
+  
+  crop = () => {
+  
+  }
+  
+  straighten = () => {
+  
+  }
+  
+  redeye = () => {
+  
+  }
+  
+  imageAdjust = () => {
+  
+  }
+  
+  autoAdjust = () => {
+  
+  }
+  */
 
-mirror = () => {
+  componentWillMount() {
+    window.removeEventListener('keydown', this.onKeyDown);
+  }
 
-}
-
-crop = () => {
-
-}
-
-straighten = () => {
-
-}
-
-redeye = () => {
-
-}
-
-imageAdjust = () => {
-
-}
-
-autoAdjust = () => {
-
-}
-*/
-
-    render() {
-      return (
-        <div>
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photon/0.1.2-alpha/css/photon.css" />
-
-          <div className="window" style={{ height: '100vh' }}>
+  render() {
+    return (
+      <div className="window" style={{ height: '100vh' }}>
+        {
+          this.state.curFileName === null ?
+            <WindowHeader title={'...' + '(' + this.state.dirPath + ')' + ' - Photos'} /> :
             <WindowHeader title={this.state.curFileName + '(' + this.state.dirPath + ')' + ' - Photos'} />
-            {this.state.isLoading?<Canvas style={'loading'} image={spinner}/> : <Canvas style={'figure'} image={this.state.dirPath + this.state.curFileName}/>}
-            <ActionsMenu onClick={[this.viewPrev, this.viewNext]} />
-          </div>
-
-        </div>
-      );
-    }
+        }
+        {
+          !this.state.curFileName ?
+            <Canvas style={'loading'} image={spinner} /> :
+            <Canvas style={'figure'} image={this.state.dirPath + this.state.curFileName} />
+        }
+        <ActionsMenu onClick={[this.viewPrev, this.viewNext]} />
+      </div>
+    );
   }
+}
 
-  export default App;
+export default App;
