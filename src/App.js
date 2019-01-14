@@ -1,3 +1,5 @@
+import div from './divosMock';
+
 import React, { Component } from 'react';
 import './App.css';
 
@@ -19,13 +21,28 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.readDir('https://danbooru.donmai.us/data/') //'~Pictures'
+    this.readDir('~/Pictures')
     window.addEventListener('keydown', this.keyHandling)
   }
 
   async readDir(path) {
     this.setState({ fileNames: '...', curFileName: '...' });
     this.setState({ dirPath: path });
+
+    let files = await div.arrayFromStream(div.fs.src(`${path}/*`));
+
+    for (let f of files) {
+      let isImgFile = f.basename.endsWith('.jpg');
+
+      console.log('===> File name:', f.basename);
+      console.log('===> Is directory?', f.isDirectory());
+      console.log('===> Is image file?', isImgFile);
+
+      if (isImgFile) {
+        console.log('===> Contents:', await div.bufFromStream(f.contents));
+      }
+    }
+
     await new Promise(resolve => setTimeout(resolve, 2000));
     this.setState({
       isLoading: false,
