@@ -1,11 +1,23 @@
 import React, { Component } from 'react';
 import './App.css';
 
+//Components
 import div from './divosMock';
 import WindowHeader from './components/WindowHeader';
 import Canvas from './components/Canvas';
 import ActionsMenu from './components/ActionsMenu';
+
+//src images
 import spinner from './icons/spinner.svg';
+import goprevious from './icons/go-previous.svg'
+import gonext from './icons/go-next.svg'
+import objectrotateright from './icons/object-rotate-right.svg'
+import objectfliphorizontal from './icons/object-flip-horizontal.svg'
+import imagecrop from './icons/image-crop.svg'
+import objectstraighten from './icons/object-straighten.svg'
+import imageredeye from './icons/image-red-eye.svg'
+import imageadjust from './icons/image-adjust.svg'
+import imageautoadjust from './icons/image-auto-adjust.svg'
 
 
 class App extends Component {
@@ -16,10 +28,6 @@ class App extends Component {
       fileNames: null,
       curFileName: null
     };
-
-    this.viewNext = this.viewNext.bind(this);
-    this.viewPrev = this.viewPrev.bind(this);
-    this.onKeyDown = this.onKeyDown.bind(this);
   }
 
   componentDidMount() {
@@ -30,7 +38,8 @@ class App extends Component {
   async readDir(path) {
     this.setState({ fileNames: null, curFileName: null });
     this.setState({ dirPath: path });
-    //alien code detected!
+    
+    //fs code
     let files = await div.arrayFromStream(div.fs.src(`${path}/*`));
 
     for (let f of files) {
@@ -44,7 +53,8 @@ class App extends Component {
         console.log('===> Contents:', await div.bufFromStream(f.contents));
       }
     }
-    //end of alien code...
+    //end of fs code
+
     await new Promise(resolve => setTimeout(resolve, 2000));
     this.setState({
       fileNames: ['__atago_kantai_collection_drawn_by_dd_ijigendd__de5f02bc2a2c68221ea60baefba1dad2.png',
@@ -73,21 +83,21 @@ class App extends Component {
     return newValue;
   }
 
-  viewNext() {
+  viewNext = () => {
     let nextIndex = this.state.fileNames.indexOf(this.state.curFileName);
     nextIndex = this.slideshowLoop(nextIndex + 1);
 
     this.setState({ curFileName: this.state.fileNames[nextIndex] });
   }
 
-  viewPrev() {
+  viewPrev = () => {
     let nextIndex = this.state.fileNames.indexOf(this.state.curFileName);
     nextIndex = this.slideshowLoop(nextIndex - 1);
 
     this.setState({ curFileName: this.state.fileNames[nextIndex] });
   }
 
-  onKeyDown(e) {
+  onKeyDown = e => {
     if (e.key === 'ArrowRight') this.viewNext();
     else if (e.key === 'ArrowLeft') this.viewPrev();
   }
@@ -130,15 +140,61 @@ class App extends Component {
       <div className="window" style={{ height: '100vh' }}>
         {
           this.state.curFileName === null ?
-            <WindowHeader title={'...' + '(' + this.state.dirPath + ')' + ' - Photos'} /> :
-            <WindowHeader title={this.state.curFileName + '(' + this.state.dirPath + ')' + ' - Photos'} />
+            <WindowHeader title={`...(${this.state.dirPath}) - Photos`} /> :
+            <WindowHeader title={`${this.state.curFileName}(${this.state.dirPath}) - Photos`} />
         }
         {
           !this.state.curFileName ?
             <Canvas style={'loading'} image={spinner} /> :
             <Canvas style={'figure'} image={this.state.dirPath + this.state.curFileName} />
         }
-        <ActionsMenu onClick={[this.viewPrev, this.viewNext]} />
+        <ActionsMenu onClick={[
+          {
+            image: goprevious,
+            fn: this.viewPrev,
+            id: 0
+          },
+          {
+            image: gonext,
+            fn: this.viewNext,
+            id: 1
+          },
+          {
+            image: objectrotateright,
+            fn: null,
+            id: 2
+          },
+          {
+            image: objectfliphorizontal,
+            fn: null,
+            id: 3
+          },
+          {
+            image: imagecrop,
+            fn: null, 
+            id: 4
+          },
+          {
+            image: objectstraighten,
+            fn: null,
+            id: 5
+          },
+          {
+            image: imageredeye,
+            fn: null,
+            id: 6
+          },
+          {
+            image: imageadjust,
+            fn: null,
+            id: 7
+          },
+          {
+            image: imageautoadjust,
+            fn: null,
+            id: 8
+          }
+        ]} />
       </div>
     );
   }
