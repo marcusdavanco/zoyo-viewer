@@ -25,21 +25,22 @@ class App extends Component {
     super();
     this.state = {
       dirPath: null,
-      fileNames: null,
-      curFileName: null
+      Files: null,
+      curFile: null
     };
   }
 
   componentDidMount() {
-    this.readDir('https://danbooru.donmai.us/data/'); //'~/Pictures'
+    this.readDir('~/Pictures'); //'https://danbooru.donmai.us/data/'
     window.addEventListener('keydown', this.onKeyDown);
   }
 
   async readDir(path) {
-    this.setState({ fileNames: null, curFileName: null });
+    this.setState({ Files: null, curFile: null });
     this.setState({ dirPath: path });
     
     //fs code
+    const loadedFiles = [];
     let files = await div.arrayFromStream(div.fs.src(`${path}/*`));
 
     for (let f of files) {
@@ -51,27 +52,23 @@ class App extends Component {
 
       if (isImgFile) {
         console.log('===> Contents:', await div.bufFromStream(f.contents));
+        loadedFiles.push(f);
       }
     }
     //end of fs code
 
     await new Promise(resolve => setTimeout(resolve, 2000));
     this.setState({
-      fileNames: ['__atago_kantai_collection_drawn_by_dd_ijigendd__de5f02bc2a2c68221ea60baefba1dad2.png',
-        '__jervis_and_zuihou_kantai_collection_drawn_by_amano_kouki__44c7dc4a9e4fd338c25b127c1b89b797.png',
-        '__remilia_scarlet_touhou_drawn_by_nenobi_nenorium__ffdc94588bd327b0ed402bec63428e7e.jpg',
-        '__tokai_teio_umamusume_drawn_by_ohshit__736e2bd99703015e8b714e0e4af02381.png',
-        '__iws_2000_girls_frontline_drawn_by_shailiar__a36f03f5200fbec35fa48e1a284bf5c8.jpg',
-      ]
+      Files: loadedFiles
     });
 
-    this.setState(prevState => ({ curFileName: prevState.fileNames[0] }));
+    this.setState(prevState => ({ curFile: prevState.Files[0] }));
 
   }
 
   slideshowLoop = (value) => {
     let newValue = value;
-    let maxValue = this.state.fileNames.length - 1;
+    let maxValue = this.state.Files.length - 1;
 
     if (newValue > maxValue) {
       newValue = 0;
@@ -84,17 +81,17 @@ class App extends Component {
   }
 
   viewNext = () => {
-    let nextIndex = this.state.fileNames.indexOf(this.state.curFileName);
+    let nextIndex = this.state.Files.indexOf(this.state.curFile);
     nextIndex = this.slideshowLoop(nextIndex + 1);
 
-    this.setState({ curFileName: this.state.fileNames[nextIndex] });
+    this.setState({ curFile: this.state.Files[nextIndex] });
   }
 
   viewPrev = () => {
-    let nextIndex = this.state.fileNames.indexOf(this.state.curFileName);
+    let nextIndex = this.state.Files.indexOf(this.state.curFile);
     nextIndex = this.slideshowLoop(nextIndex - 1);
 
-    this.setState({ curFileName: this.state.fileNames[nextIndex] });
+    this.setState({ curFile: this.state.Files[nextIndex] });
   }
 
   onKeyDown = e => {
@@ -139,14 +136,14 @@ class App extends Component {
     return (
       <div className="window" style={{ height: '100vh' }}>
         {
-          this.state.curFileName === null ?
+          this.state.curFile === null ?
             <WindowHeader title={`...(${this.state.dirPath}) - Photos`} /> :
-            <WindowHeader title={`${this.state.curFileName}(${this.state.dirPath}) - Photos`} />
+            <WindowHeader title={`${this.state.curFile.basename}(${this.state.dirPath}) - Photos`} />
         }
         {
-          !this.state.curFileName ?
+          !this.state.curFile ?
             <Canvas style={'loading'} image={spinner} /> :
-            <Canvas style={'figure'} image={this.state.dirPath + this.state.curFileName} />
+            <Canvas style={'figure'} image={this.state.dirPath + this.state.curFile} />
         }
         <ActionsMenu onClick={[
           {
